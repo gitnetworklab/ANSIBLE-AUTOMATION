@@ -1,7 +1,7 @@
 ---
 
 - name: "MY BANNER PLAYBOOK"
-  hosts: NORTH
+  hosts: SWITCHES
   gather_facts: false
   connection: network_cli
 
