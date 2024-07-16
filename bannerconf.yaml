@@ -1,7 +1,7 @@
 ---
 
 - name: "MY BANNER PLAYBOOK"
-  hosts: SWITCHES
+  hosts: all
   gather_facts: false
   connection: network_cli
 
@@ -10,9 +10,22 @@
       cisco.ios.ios_banner: 
         banner: motd
         text: | 
-          *** THIS IS MY NEW BANNER ***
+          ********************************************************************************************************************
+          *                                                                                                                  *
+          *                                      *** THIS IS LAB ENVIRONMENT ***                                             *
+          *                                                                                                                  *
+          * UNAUTHORIZED ACCESS TO THIS DEVICE IS PROHIBITED AND VIOLATORS WILL BE PROSECUTED TO THE FULL EXTENT OF THE LAW. *
+          *                                                                                                                  *
+          ********************************************************************************************************************
         state: present
       
       register: my_banner
 
     - debug: var=my_banner
+
+    - name: "See interface brief"
+      cisco.ios.ios_command:
+        commands: sh ip int b
+      register: int_brief
+    
+    - debug: var=int_brief
